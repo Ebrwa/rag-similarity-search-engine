@@ -8,9 +8,7 @@ from groq import Groq
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
-from langchain_core.documents import Document
-
-
+from langchain_core.documents import Docum
 INDEX_PATH = "faiss_index"
 CSV_PATH = "human_rights_links-2.csv"
 MODEL_NAME = "llama-3.3-70b-versatile"
