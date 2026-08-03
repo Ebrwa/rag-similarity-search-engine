@@ -135,6 +135,6 @@ Display answer with sources
 
 ## Author
 
-**Ibrahim Blih**
+**Ibrahim Bileh**
 
 Software Engineering Student interested in AI Engineering, LLM applications, and building practical software systems.
