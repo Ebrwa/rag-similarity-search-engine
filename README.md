@@ -31,15 +31,15 @@ Example:
 
 First question:
 
-What is the right to education?
+`What is the right to education?`
 
 Follow-up question:
 
-Who should protect it?
+`Who should protect it?`
 
 The application can rewrite the follow-up question as:
 
-Who is responsible for protecting the right to education?
+`Who is responsible for protecting the right to education?`
 
 This allows the chatbot to maintain context without requiring the user to repeat previous information.
 
@@ -49,7 +49,7 @@ The application compares three retrieval methods.
 
 ### 1. Basic Similarity Search
 
-Basic similarity search retrieves the document chunks that are most semantically similar to the user's question.
+Basic Similarity Search retrieves the document chunks that are most semantically similar to the user's question.
 
 This method is used as the baseline for comparison.
 
@@ -77,7 +77,7 @@ The application compares the retrieval methods using:
 
 Example test question:
 
-What is the right to education?
+`What is the right to education?`
 
 Example results:
 
@@ -87,9 +87,9 @@ Example results:
 | MMR | 3 | 3 |
 | Multi-Query Retrieval | 5 | 4 |
 
-In this test, Basic Similarity Search was the fastest approach.
+In this test, Basic Similarity Search and MMR were faster than Multi-Query Retrieval.
 
-MMR returned more diverse sources than basic similarity search.
+MMR returned more diverse sources than Basic Similarity Search.
 
 Multi-Query Retrieval required more time because it generated and searched multiple queries, but it retrieved information from a larger number of unique sources.
 
@@ -105,7 +105,7 @@ The application follows this pipeline:
 6. Store embeddings in FAISS.
 7. Receive a user question.
 8. Use conversation history to rewrite follow-up questions.
-9. Perform Basic, MMR, and Multi-Query retrieval.
+9. Perform Basic Similarity, MMR, and Multi-Query retrieval.
 10. Compare retrieval results.
 11. Build context from retrieved documents.
 12. Send the context and conversation history to the Groq language model.
@@ -145,3 +145,58 @@ Install the required packages:
 
 ```bash
 pip install -r requirements.txt
+```
+
+Create a `.env` file and add your Groq API key:
+
+```env
+GROQ_API_KEY=your_api_key_here
+```
+
+The `.env` file is excluded from Git using `.gitignore`.
+
+## Run the Application
+
+Run:
+
+```bash
+python main.py
+```
+
+Then enter a question:
+
+```text
+What is the right to education?
+```
+
+You can continue with a follow-up question:
+
+```text
+Who should protect it?
+```
+
+Type:
+
+```text
+exit
+```
+
+to close the application.
+
+## Project Structure
+
+```text
+similarity-search-engine/
+│
+├── faiss_index/
+├── .env
+├── .gitignore
+├── human_rights_links-2.csv
+├── main.py
+├── README.md
+└── requirements.txt
+```
+
+## Notes
+
+The chatbot is instructed to answer using only the retrieved context. If the retrieved sources do not contain enough information, the model is instructed to state that there is not enough information in the provided sources.
